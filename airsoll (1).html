@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIRSOLL — Industrial Air Compressors, Dryers &amp; Air Treatment Systems</title>
+<meta name="description" content="AIRSOLL designs and builds screw, piston and diesel-driven air compressors, plus dryers, filters and receivers, sized for continuous industrial duty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   AIRSOLL — Industrial Air Systems
+   Design tokens
+   ========================================================================== */
+:root{
+  --bg:        #EEF1EF;
+  --bg-panel:  #E4E9E6;
+  --ink:       #0F1A1D;
+  --ink-soft:  #3C4A4D;
+  --deep:      #10222A;
+  --deep-2:    #16303A;
+  --teal:      #2B6E77;
+  --teal-dim:  #1E4E56;
+  --amber:     #E8A33D;
+  --amber-dim: #C6832A;
+  --line:      #C6CFCB;
+  --line-dark: #33474D;
+  --white:     #FBFBF9;
+
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-body:    "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", "Courier New", monospace;
+
+  --container: 1180px;
+  --radius: 3px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4{ font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; margin:0; }
+p{ margin:0; }
+
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+:focus-visible{
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---- eyebrow / gauge-readout label -------------------------------------- */
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before{
+  content:"";
+  width: 7px; height:7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 3px rgba(232,163,61,0.18);
+}
+.on-dark .eyebrow{ color: #9FD2CF; }
+
+/* readout chip: [ 145 PSI ] styled like an instrument value */
+.readout{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line-dark);
+  color: var(--white);
+  padding: 5px 10px 4px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+.readout b{ color: var(--amber); font-weight: 600; }
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header{
+  position: sticky; top:0; z-index: 100;
+  background: var(--deep);
+  border-bottom: 1px solid var(--line-dark);
+}
+.site-header .bar{
+  display:flex; align-items:center; justify-content:space-between;
+  height: 76px;
+}
+.logo{
+  display:flex; align-items:center; gap:10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+.logo .mark{
+  width: 30px; height:30px;
+  flex-shrink:0;
+}
+.logo small{
+  display:block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: #8FAFB2;
+  font-weight:500;
+  margin-top: 1px;
+}
+nav.main-nav{ display:flex; align-items:center; gap: 34px; }
+nav.main-nav a{
+  color: #D7E4E2;
+  font-size: 14.5px;
+  font-weight: 500;
+  position: relative;
+  padding: 6px 0;
+}
+nav.main-nav a.active{ color: var(--white); }
+nav.main-nav a.active::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-2px;
+  height:2px; background: var(--amber);
+}
+nav.main-nav a:hover{ color: var(--white); }
+
+.header-actions{ display:flex; align-items:center; gap:16px; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor:pointer;
+  transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn:active{ transform: translateY(1px); }
+.btn-amber{ background: var(--amber); color: var(--deep); }
+.btn-amber:hover{ background: #F0B85C; }
+.btn-outline{ border-color: var(--line-dark); color: var(--white); background:transparent; }
+.btn-outline:hover{ border-color: var(--amber); color: var(--amber); }
+.btn-ghost{ color: var(--ink); border-color: var(--line); background: transparent; }
+.btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+.btn-sm{ padding: 9px 16px; font-size: 13.5px; }
+
+.nav-toggle{
+  display:none;
+  background:none; border:none; color:var(--white); cursor:pointer;
+  padding: 8px;
+}
+
+@media (max-width: 900px){
+  nav.main-nav{
+    position:absolute; top:76px; left:0; right:0;
+    background: var(--deep);
+    flex-direction:column; align-items:flex-start;
+    padding: 10px 28px 22px;
+    border-bottom: 1px solid var(--line-dark);
+    display:none;
+    gap: 4px;
+  }
+  nav.main-nav.open{ display:flex; }
+  nav.main-nav a{ padding: 10px 0; width:100%; }
+  .header-actions .btn-outline{ display:none; }
+  .nav-toggle{ display:inline-flex; }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero{
+  background: radial-gradient(120% 140% at 78% -10%, #1B3B45 0%, var(--deep) 46%, var(--deep) 100%);
+  color: var(--white);
+  padding: 88px 0 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero .container{
+  display:grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items:center;
+}
+.hero h1{
+  font-size: clamp(38px, 4.6vw, 60px);
+  line-height: 1.04;
+  margin: 18px 0 22px;
+  color: var(--white);
+}
+.hero h1 em{
+  font-style: normal;
+  color: var(--amber);
+}
+.hero p.lead{
+  font-size: 17.5px;
+  color: #C6D6D5;
+  max-width: 520px;
+  margin-bottom: 32px;
+}
+.hero .cta-row{ display:flex; gap: 14px; flex-wrap:wrap; margin-bottom: 40px; }
+.hero .readouts{ display:flex; gap: 10px; flex-wrap:wrap; }
+
+/* Gauge signature element */
+.gauge-wrap{
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.gauge-card{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line-dark);
+  border-radius: 8px;
+  padding: 30px 26px 22px;
+  width: 100%;
+  max-width: 420px;
+  backdrop-filter: blur(2px);
+}
+.gauge-card .gauge-label{
+  display:flex; justify-content:space-between; align-items:baseline;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #8FAFB2;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.gauge-svg{ width:100%; height:auto; display:block; }
+.gauge-needle{
+  transform-origin: 150px 150px;
+  transform: rotate(-90deg);
+  animation: gauge-sweep 2.1s cubic-bezier(.2,.8,.2,1) 0.2s forwards;
+}
+@keyframes gauge-sweep{
+  0%{ transform: rotate(-90deg); }
+  62%{ transform: rotate(76deg); }
+  78%{ transform: rotate(56deg); }
+  100%{ transform: rotate(64deg); }
+}
+.gauge-value{
+  text-align:center;
+  margin-top: -6px;
+}
+.gauge-value .num{
+  font-family: var(--font-mono);
+  font-size: 40px;
+  color: var(--white);
+  font-weight: 600;
+}
+.gauge-value .unit{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--amber);
+  letter-spacing: 0.12em;
+}
+.gauge-foot{
+  display:flex; justify-content: space-between;
+  border-top: 1px solid var(--line-dark);
+  margin-top: 18px; padding-top: 14px;
+}
+.gauge-foot div{ text-align:center; flex:1; }
+.gauge-foot .v{ font-family: var(--font-mono); color:var(--white); font-size:15px; }
+.gauge-foot .k{ font-family: var(--font-mono); color:#7C9C9F; font-size: 10.5px; letter-spacing:0.1em; margin-top:2px; }
+
+@media (max-width: 900px){
+  .hero .container{ grid-template-columns: 1fr; }
+  .gauge-wrap{ order:-1; }
+}
+
+/* ==========================================================================
+   Ticker strip (measurement motif divider instead of plain hr)
+   ========================================================================== */
+.tick-strip{
+  background: var(--bg-panel);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 13px 0;
+}
+.tick-strip .tick-track{
+  display:inline-flex;
+  animation: tick-scroll 32s linear infinite;
+}
+.tick-strip span{
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  padding: 0 26px;
+  border-right: 1px solid var(--line);
+}
+.tick-strip span b{ color: var(--teal); }
+@keyframes tick-scroll{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+section{ padding: 88px 0; }
+.section-head{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap: 30px; margin-bottom: 44px; flex-wrap:wrap;
+}
+.section-head h2{
+  font-size: clamp(28px, 3vw, 38px);
+  margin-top: 10px;
+  max-width: 640px;
+}
+.section-head p{ color: var(--ink-soft); max-width: 420px; font-size: 15.5px; }
+
+.section-dark{ background: var(--deep); color: var(--white); }
+.section-dark .section-head p{ color:#A9C1C0; }
+.section-alt{ background: var(--bg-panel); }
+
+/* product / card grid */
+.card-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.p-card{
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 26px 24px 24px;
+  display:flex; flex-direction:column; gap: 14px;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.p-card:hover{ border-color: var(--teal); transform: translateY(-3px); }
+.p-card .idx{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--amber-dim);
+  letter-spacing: 0.1em;
+}
+.p-card .icon{ width: 42px; height:42px; color: var(--teal); }
+.p-card h3{ font-size: 19px; }
+.p-card p{ color: var(--ink-soft); font-size: 14.5px; flex-grow:1; }
+.p-card .specs{
+  display:flex; gap:8px; flex-wrap:wrap; margin-top: 6px;
+}
+.p-card .specs span{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: var(--ink-soft);
+}
+.p-card .go{
+  font-size: 13.5px; font-weight:600; color: var(--teal);
+  display:inline-flex; align-items:center; gap:6px; margin-top:4px;
+}
+.p-card .go svg{ width:13px; height:13px; transition: transform .15s ease; }
+.p-card:hover .go svg{ transform: translateX(3px); }
+
+@media (max-width: 980px){ .card-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px){ .card-grid{ grid-template-columns: 1fr; } }
+
+/* industries */
+.ind-grid{
+  display:grid; grid-template-columns: repeat(3,1fr); gap:1px;
+  background: var(--line-dark);
+  border: 1px solid var(--line-dark);
+}
+.ind-item{
+  background: var(--deep-2);
+  padding: 34px 28px;
+  min-height: 210px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.ind-item .n{ font-family: var(--font-mono); color:#7C9C9F; font-size:12px; letter-spacing:.1em; }
+.ind-item h3{ color: var(--white); font-size: 20px; margin: 14px 0 10px; }
+.ind-item p{ color: #A9C1C0; font-size: 14px; }
+@media (max-width: 900px){ .ind-grid{ grid-template-columns: 1fr; } }
+
+/* about / stats */
+.about-grid{
+  display:grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items:center;
+}
+.stat-row{
+  display:grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 34px;
+}
+.stat{
+  border-left: 2px solid var(--amber);
+  padding-left: 14px;
+}
+.stat .v{ font-family: var(--font-mono); font-size: 30px; font-weight:600; }
+.stat .k{ font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; letter-spacing: .02em; }
+@media (max-width: 900px){
+  .about-grid{ grid-template-columns: 1fr; }
+  .stat-row{ grid-template-columns: repeat(2,1fr); }
+}
+.blueprint{
+  border: 1px solid var(--line-dark);
+  border-radius: 8px;
+  background:
+    linear-gradient(var(--deep-2), var(--deep-2)) padding-box,
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 28px);
+  background-color: var(--deep-2);
+  padding: 30px;
+  aspect-ratio: 4/3.4;
+  position: relative;
+  overflow:hidden;
+}
+
+/* process (legit sequence: design/build/test/ship) */
+.process{
+  display:grid; grid-template-columns: repeat(4,1fr); gap: 0;
+  border-top: 1px solid var(--line);
+}
+.p-step{
+  padding: 30px 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.p-step:last-child{ border-right:none; }
+.p-step .stage{ font-family: var(--font-mono); font-size:12px; color: var(--amber-dim); letter-spacing:.1em; }
+.p-step h4{ font-size: 18px; margin: 12px 0 8px; }
+.p-step p{ font-size: 14px; color: var(--ink-soft); }
+@media (max-width: 900px){
+  .process{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .process{ grid-template-columns: 1fr; }
+}
+
+/* CTA band */
+.cta-band{
+  background: linear-gradient(100deg, var(--teal-dim), var(--deep));
+  color: var(--white);
+  padding: 70px 0;
+}
+.cta-band .container{
+  display:flex; justify-content:space-between; align-items:center; gap: 30px; flex-wrap:wrap;
+}
+.cta-band h2{ font-size: clamp(26px,3vw,34px); max-width: 520px; }
+.cta-band p{ color:#BFDAD9; margin-top:10px; max-width:480px; }
+.cta-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+
+/* Footer */
+footer{
+  background: var(--deep);
+  color: #A9C1C0;
+  padding: 64px 0 26px;
+}
+.footer-grid{
+  display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px;
+  padding-bottom: 44px; border-bottom: 1px solid var(--line-dark);
+}
+.footer-grid h5{
+  color: var(--white); font-family: var(--font-mono); font-size:12.5px;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px;
+}
+.footer-grid li{ margin-bottom: 10px; font-size: 14px; }
+.footer-grid a:hover{ color: var(--white); }
+.footer-brand p{ margin: 14px 0 20px; font-size: 14px; max-width: 280px; color:#8FAFB2; }
+.social-row{ display:flex; gap: 12px; }
+.social-row a{
+  width: 34px; height:34px; border:1px solid var(--line-dark); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition: border-color .15s ease, color .15s ease;
+}
+.social-row a:hover{ border-color: var(--amber); color: var(--amber); }
+.social-row svg{ width:15px; height:15px; }
+.foot-bottom{
+  display:flex; justify-content:space-between; padding-top: 22px; font-size: 12.5px;
+  flex-wrap:wrap; gap: 10px;
+}
+@media (max-width: 900px){
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .footer-grid{ grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Page header (sub-pages)
+   ========================================================================== */
+.page-hero{
+  background: var(--deep);
+  color: var(--white);
+  padding: 60px 0 54px;
+  border-bottom: 1px solid var(--line-dark);
+}
+.page-hero h1{ color: var(--white); font-size: clamp(30px,4vw,44px); margin-top: 14px; }
+.page-hero p{ color:#A9C1C0; max-width: 560px; margin-top: 14px; font-size: 15.5px; }
+.crumbs{
+  font-family: var(--font-mono); font-size: 12.5px; color:#7C9C9F;
+}
+.crumbs a:hover{ color: var(--white); }
+
+/* detail rows on products page */
+.detail-row{
+  display:grid; grid-template-columns: 0.9fr 1.1fr; gap: 50px;
+  padding: 56px 0; border-bottom: 1px solid var(--line);
+  align-items:center;
+}
+.detail-row:last-child{ border-bottom:none; }
+.detail-row.rev{ direction: rtl; }
+.detail-row.rev > *{ direction: ltr; }
+.detail-media{
+  border: 1px solid var(--line-dark);
+  border-radius: 8px;
+  background: var(--deep-2);
+  aspect-ratio: 4/3;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.detail-media svg{ width: 62%; height:62%; }
+.detail-text .idx{ font-family: var(--font-mono); color: var(--amber-dim); font-size:13px; letter-spacing:.1em; }
+.detail-text h3{ font-size: 27px; margin: 12px 0 14px; }
+.detail-text p{ color: var(--ink-soft); font-size: 15.5px; margin-bottom: 18px; }
+.detail-text .spec-table{ display:grid; grid-template-columns: repeat(2,1fr); gap: 10px 20px; margin-bottom: 22px; }
+.detail-text .spec-table div{ border-top: 1px solid var(--line); padding-top: 8px; }
+.detail-text .spec-table .k{ font-family: var(--font-mono); font-size:11px; color:var(--ink-soft); letter-spacing:.06em; text-transform:uppercase; }
+.detail-text .spec-table .v{ font-family: var(--font-mono); font-size:16px; margin-top:3px; }
+@media (max-width: 900px){
+  .detail-row, .detail-row.rev{ grid-template-columns: 1fr; direction: ltr; }
+}
+
+/* contact page */
+.contact-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.field{ margin-bottom: 18px; }
+.field label{
+  display:block; font-family: var(--font-mono); font-size: 11.5px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 7px;
+}
+.field input, .field textarea, .field select{
+  width:100%; padding: 12px 13px; border: 1px solid var(--line);
+  border-radius: 4px; font-family: var(--font-body); font-size: 14.5px;
+  background: var(--white); color: var(--ink);
+}
+.field input:focus, .field textarea:focus, .field select:focus{
+  border-color: var(--teal); outline: none;
+}
+.field textarea{ resize: vertical; min-height: 110px; }
+.contact-info-card{
+  background: var(--deep); color: var(--white); border-radius: 8px;
+  padding: 34px 30px;
+}
+.contact-info-card .row{ display:flex; gap:14px; padding: 16px 0; border-top: 1px solid var(--line-dark); }
+.contact-info-card .row:first-of-type{ border-top:none; }
+.contact-info-card .row svg{ width:20px; height:20px; color: var(--amber); flex-shrink:0; margin-top:2px; }
+.contact-info-card .row .k{ font-size:12px; color:#8FAFB2; letter-spacing:.06em; text-transform:uppercase; font-family: var(--font-mono); }
+.contact-info-card .row .v{ font-size: 15px; margin-top: 3px; }
+.form-note{ font-size: 13px; color: var(--ink-soft); margin-top: 10px; }
+@media (max-width: 900px){ .contact-grid{ grid-template-columns:1fr; } }
+
+/* about page timeline */
+.timeline{ position:relative; padding-left: 26px; border-left: 2px solid var(--line); }
+.t-item{ position:relative; padding-bottom: 40px; }
+.t-item:last-child{ padding-bottom:0; }
+.t-item::before{
+  content:""; position:absolute; left:-31px; top:2px;
+  width:10px; height:10px; border-radius:50%; background: var(--amber);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.t-item .yr{ font-family: var(--font-mono); color: var(--teal); font-size: 14px; }
+.t-item h4{ font-size:18px; margin: 6px 0 6px; }
+.t-item p{ color: var(--ink-soft); font-size: 14.5px; max-width: 520px; }
+
+/* contact details (form removed — details only) */
+.contact-details-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 20px;
+}
+.contact-detail-card{
+  background: var(--deep);
+  border: 1px solid var(--line-dark);
+  border-radius: 8px;
+  padding: 28px 22px;
+  text-align: center;
+  color: var(--white);
+}
+.contact-detail-card svg{
+  width: 26px; height: 26px;
+  color: var(--amber);
+  margin: 0 auto 16px;
+  display:block;
+}
+.contact-detail-card .k{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8FAFB2;
+  margin-bottom: 8px;
+}
+.contact-detail-card .v{
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+@media (max-width: 900px){
+  .contact-details-grid{ grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 560px){
+  .contact-details-grid{ grid-template-columns: 1fr; }
+}
+
+/* single-page adjustments */
+.page-hero{ display:none; }
+.crumbs{ display:none; }
+section[id]{ scroll-margin-top: 80px; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container bar">
+    <a href="#home" class="logo">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="14.5" stroke="#E8A33D" stroke-width="2"/>
+        <path d="M16 6.5V16L22 21" stroke="#FBFBF9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="16" r="2" fill="#E8A33D"/>
+      </svg>
+      <span>AIRSOLL<small>INDUSTRIAL AIR SYSTEMS</small></span>
+    </a>
+    <nav class="main-nav">
+      <a href="#home" class="active">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#process">How We Build</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-outline btn-sm">Request a Quote</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div>
+      <span class="eyebrow">Screw · Piston · Diesel · Treatment</span>
+      <h1>Compressed air, engineered to <em>hold.</em></h1>
+      <p class="lead">AIRSOLL builds rotary screw, piston and diesel-driven compressors — and the dryers, filters and receivers that back them up — sized and load-tested for lines that don't get to stop.</p>
+      <div class="cta-row">
+        <a href="#products" class="btn btn-amber">View the range</a>
+        <a href="#contact" class="btn btn-outline">Talk to an engineer</a>
+      </div>
+      <div class="readouts">
+        <span class="readout">DUTY <b>24/7</b></span>
+        <span class="readout">OIL-FREE OPTION <b>ISO 8573-1</b></span>
+        <span class="readout">DRIVE <b>PM VSD</b></span>
+      </div>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge-card">
+        <div class="gauge-label"><span>Discharge Pressure</span><span>Live Reading</span></div>
+        <svg class="gauge-svg" viewBox="0 0 300 175" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 150 A130 130 0 0 1 280 150" stroke="#243D42" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M20 150 A130 130 0 0 1 130 21" stroke="#2B6E77" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M130 21 A130 130 0 0 1 235 60" stroke="#E8A33D" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <g class="gauge-needle">
+            <line x1="150" y1="150" x2="150" y2="35" stroke="#FBFBF9" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="150" cy="150" r="7" fill="#FBFBF9"/>
+          </g>
+          <text x="30" y="168" fill="#7C9C9F" font-family="IBM Plex Mono" font-size="10">0</text>
+          <text x="262" y="168" fill="#7C9C9F" font-family="IBM Plex Mono" font-size="10">200</text>
+        </svg>
+        <div class="gauge-value"><span class="num">145</span> <span class="unit">PSI</span></div>
+        <div class="gauge-foot">
+          <div><div class="v">92 CFM</div><div class="k">FREE AIR</div></div>
+          <div><div class="v">22 kW</div><div class="k">DRIVE POWER</div></div>
+          <div><div class="v">68 dB(A)</div><div class="k">AT 1M</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tick-strip" aria-hidden="true">
+  <div class="tick-track">
+    <span>ROTARY SCREW <b>OIL-INJECTED</b></span>
+    <span>ROTARY SCREW <b>OIL-FREE</b></span>
+    <span>DRIVE <b>PM VSD</b></span>
+    <span>PORTABLE <b>DIESEL-DRIVEN</b></span>
+    <span>RECIPROCATING <b>PISTON</b></span>
+    <span>TREATMENT <b>DRYERS · FILTERS · TANKS</b></span>
+    <span>SUPPORT <b>PARTS &amp; AIRENDS</b></span>
+  </div>
+</div>
+
+<section id="products">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What we build</span>
+        <h2>Six product families, one spec sheet you can trust.</h2>
+      </div>
+      <p>Every machine below ships with a real performance curve, not a marketing range.</p>
+    </div>
+
+    <div class="detail-row" id="screw">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <rect x="20" y="40" width="160" height="90" rx="6" stroke="#2B6E77" stroke-width="2.5"/>
+          <circle cx="70" cy="85" r="16" stroke="#E8A33D" stroke-width="2.5"/>
+          <circle cx="130" cy="85" r="16" stroke="#E8A33D" stroke-width="2.5"/>
+          <path d="M20 60h160M40 130v14M160 130v14" stroke="#2B6E77" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">01 / OIL-INJECTED SCREW</span>
+        <h3>Belt &amp; Direct-Driven Screw Compressors</h3>
+        <p>Twin helical rotors compress air continuously rather than in pulses, which is why screw units are the default for anything running more than a shift a day. Choose belt-drive for flexible output staging, or direct-drive for a tighter footprint and fewer moving parts to service.</p>
+        <div class="spec-table">
+          <div><div class="k">Power range</div><div class="v">7.5–250 kW</div></div>
+          <div><div class="k">Working pressure</div><div class="v">7–13 bar</div></div>
+          <div><div class="k">Free air delivery</div><div class="v">1.0–43 m³/min</div></div>
+          <div><div class="k">Drive</div><div class="v">Belt or direct</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+
+    <div class="detail-row rev" id="vsd">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <circle cx="100" cy="80" r="52" stroke="#2B6E77" stroke-width="2.5"/>
+          <path d="M100 40v40l28 16" stroke="#E8A33D" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="100" cy="80" r="5" fill="#E8A33D"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">02 / PM VSD</span>
+        <h3>Permanent-Magnet VSD Energy-Saving Compressors</h3>
+        <p>A fixed-speed compressor either runs at full output or unloads — both waste power. Our PM VSD range uses a permanent-magnet motor and inverter to match motor speed to the plant's actual demand curve, second by second, which is where most of the electricity bill savings come from.</p>
+        <div class="spec-table">
+          <div><div class="k">Power range</div><div class="v">7.5–160 kW</div></div>
+          <div><div class="k">Motor class</div><div class="v">IE5 permanent-magnet</div></div>
+          <div><div class="k">Typical saving</div><div class="v">Up to 35% vs fixed-speed</div></div>
+          <div><div class="k">Turndown</div><div class="v">Down to 25% speed</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+
+    <div class="detail-row" id="oilfree">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <path d="M100 25c25 33 46 56 46 82a46 46 0 0 1-92 0c0-26 21-49 46-82Z" stroke="#2B6E77" stroke-width="2.5"/>
+          <path d="M84 118a16 16 0 0 0 16 16" stroke="#E8A33D" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">03 / OIL-FREE SCREW</span>
+        <h3>Certified Oil-Free Screw Compressors</h3>
+        <p>Where compressed air touches the product — inhalers, tablets, wafers, packaged food — a single carry-over droplet is a contamination event, not a maintenance note. These units use water- or air-injected rotor sets with zero lubricating oil in the compression chamber, tested and certified to Class 0.</p>
+        <div class="spec-table">
+          <div><div class="k">Power range</div><div class="v">11–160 kW</div></div>
+          <div><div class="k">Air purity</div><div class="v">ISO 8573-1 Class 0</div></div>
+          <div><div class="k">Typical sectors</div><div class="v">Pharma, food, electronics</div></div>
+          <div><div class="k">Cooling</div><div class="v">Air or water</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+
+    <div class="detail-row rev" id="diesel">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <rect x="20" y="60" width="120" height="50" rx="6" stroke="#2B6E77" stroke-width="2.5"/>
+          <circle cx="48" cy="122" r="14" stroke="#E8A33D" stroke-width="2.5"/>
+          <circle cx="112" cy="122" r="14" stroke="#E8A33D" stroke-width="2.5"/>
+          <path d="M140 70h20l14 18v22h-34" stroke="#2B6E77" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">04 / PORTABLE DIESEL</span>
+        <h3>Trailer &amp; Skid-Mounted Diesel Compressors</h3>
+        <p>Built for the sites without a grid connection: well pads, quarries, road crews and blasting operations. Everything from the fuel tank to the sound canopy is rated for continuous outdoor duty, not a weekend generator's worth of run-time.</p>
+        <div class="spec-table">
+          <div><div class="k">Free air delivery</div><div class="v">2.5–35 m³/min</div></div>
+          <div><div class="k">Working pressure</div><div class="v">7–24 bar</div></div>
+          <div><div class="k">Mounting</div><div class="v">Trailer or skid</div></div>
+          <div><div class="k">Engine emissions</div><div class="v">Tier III / Tier IV</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+
+    <div class="detail-row" id="piston">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <circle cx="70" cy="100" r="38" stroke="#2B6E77" stroke-width="2.5"/>
+          <rect x="112" y="45" width="60" height="36" rx="3" stroke="#E8A33D" stroke-width="2.5"/>
+          <path d="M100 84l20-24" stroke="#2B6E77" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">05 / PISTON</span>
+        <h3>Reciprocating Piston Compressors</h3>
+        <p>For intermittent duty and lighter loads — a workshop, a spray booth, a single production cell — a piston unit is simpler to service and cheaper to replace than a screw machine, and that's the honest trade-off we'll walk you through.</p>
+        <div class="spec-table">
+          <div><div class="k">Power range</div><div class="v">1.5–15 kW</div></div>
+          <div><div class="k">Stages</div><div class="v">Single or two-stage</div></div>
+          <div><div class="k">Tank options</div><div class="v">50–500L</div></div>
+          <div><div class="k">Duty cycle</div><div class="v">Intermittent</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+
+    <div class="detail-row rev" id="treatment">
+      <div class="detail-media">
+        <svg viewBox="0 0 200 160" fill="none">
+          <rect x="60" y="20" width="80" height="120" rx="8" stroke="#2B6E77" stroke-width="2.5"/>
+          <path d="M78 50h44M78 76h44M78 102h30" stroke="#E8A33D" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="detail-text">
+        <span class="idx">06 / TREATMENT</span>
+        <h3>Refrigerated Dryers, Line Filters &amp; Air Receivers</h3>
+        <p>A compressor without treatment equipment is only half a system — raw discharge air carries moisture, oil aerosol and particulate that will corrode pipework and foul instruments downstream. We size dryers, coalescing/particulate filters and receiver tanks as one matched set, not separate afterthoughts.</p>
+        <div class="spec-table">
+          <div><div class="k">Dryer dew point</div><div class="v">Down to −40°C</div></div>
+          <div><div class="k">Filter grades</div><div class="v">Particulate to 0.01 micron</div></div>
+          <div><div class="k">Receiver capacity</div><div class="v">270–5000 L</div></div>
+          <div><div class="k">Vessel rating</div><div class="v">Up to 16 bar</div></div>
+        </div>
+        <a href="#contact" class="btn btn-ghost btn-sm">Request this spec sheet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="parts">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Aftercare</span>
+        <h2>Parts for machines we didn't sell you, too.</h2>
+      </div>
+      <p>Airends, drive motors, separators, oil charges and filter kits — most ship same-week.</p>
+    </div>
+    <div class="card-grid">
+      <article class="p-card">
+        <span class="idx">PART</span>
+        <h3>Airend Rebuild Kits</h3>
+        <p>Bearings, seals and rotor sets for the compression element — the part that actually does the work.</p>
+      </article>
+      <article class="p-card">
+        <span class="idx">PART</span>
+        <h3>Drive Motors</h3>
+        <p>Fixed-speed and PM VSD replacement motors matched to your existing frame and mounting.</p>
+      </article>
+      <article class="p-card">
+        <span class="idx">PART</span>
+        <h3>Oil Separators &amp; Filters</h3>
+        <p>Separator elements, intake filters and line filter cartridges across every family we build.</p>
+      </article>
+      <article class="p-card">
+        <span class="idx">PART</span>
+        <h3>Coolers &amp; Sensors</h3>
+        <p>Oil and air coolers, pressure and temperature sensors, and the drain valves that keep condensate moving.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" id="industries">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Industries on our books</span>
+        <h2>Same air quality standard, different job sites.</h2>
+      </div>
+      <p>We spec each install around what the plant actually runs — not a catalogue default.</p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-item">
+        <span class="n">SITE / 01</span>
+        <div>
+          <h3>Manufacturing</h3>
+          <p>Driving pneumatic tooling, CNC lines and assembly-cell automation where a pressure dip means a stopped line, not a slower one.</p>
+        </div>
+      </div>
+      <div class="ind-item">
+        <span class="n">SITE / 02</span>
+        <div>
+          <h3>Oil &amp; Gas</h3>
+          <p>Instrument air and pneumatic controls for well sites, pipeline maintenance and refinery turnarounds, built for hard duty cycles.</p>
+        </div>
+      </div>
+      <div class="ind-item">
+        <span class="n">SITE / 03</span>
+        <div>
+          <h3>Automotive</h3>
+          <p>Body-shop tooling, tyre stations and paint-line air supply, specified for the vibration and dust of a working plant floor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about-grid">
+    <div>
+      <span class="eyebrow">About AIRSOLL</span>
+      <h2>Built by people who've had to fix what they sold.</h2>
+      <p style="color:var(--ink-soft); margin-top:16px; font-size:15.5px;">AIRSOLL grew out of a compressed-air service business, so the machines are designed around the calls that used to keep our engineers up at night: overheating airends, seized valves, dryers that couldn't keep up in July. We build compressors, treatment equipment and the spares to back them, and we stand behind the install after the invoice is paid.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="v">40+</div><div class="k">Countries shipped to</div></div>
+        <div class="stat"><div class="v">600+</div><div class="k">Active installations</div></div>
+        <div class="stat"><div class="v">98%</div><div class="k">Parts in stock, same week</div></div>
+        <div class="stat"><div class="v">24/7</div><div class="k">Technical support line</div></div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="yr">FIELD SERVICE ERA</div>
+        <h4>Started fixing other manufacturers' machines</h4>
+        <p>Years of call-outs taught us exactly which components fail first, and why.</p>
+      </div>
+      <div class="t-item">
+        <div class="yr">FIRST BUILD</div>
+        <h4>Shipped our first screw compressor line</h4>
+        <p>Built around the failure points we'd already seen in the field, not a clean-sheet design.</p>
+      </div>
+      <div class="t-item">
+        <div class="yr">TREATMENT RANGE</div>
+        <h4>Added dryers, filters and receivers</h4>
+        <p>Stopped treating air treatment as someone else's problem to size.</p>
+      </div>
+      <div class="t-item">
+        <div class="yr">TODAY</div>
+        <h4>Full range, same service line</h4>
+        <p>Six product families, one support number, and engineers who still pick up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" id="process">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">How we build</span>
+        <h2>Four stages, in order, every time.</h2>
+      </div>
+      <p>No stage starts until the one before it has signed off — that's the whole method.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="process" style="border-color:var(--line-dark);">
+      <div class="p-step" style="border-color:var(--line-dark);">
+        <span class="stage">01 — DESIGN</span>
+        <h4 style="color:var(--white);">Spec to the duty cycle</h4>
+        <p style="color:#A9C1C0;">We size the airend, motor and treatment train to your actual run hours and ambient conditions, not a catalogue default.</p>
+      </div>
+      <div class="p-step" style="border-color:var(--line-dark);">
+        <span class="stage">02 — BUILD</span>
+        <h4 style="color:var(--white);">Assemble on a fixed line</h4>
+        <p style="color:#A9C1C0;">Every unit is built on a numbered line with torque and pressure checks logged at each station, not sampled.</p>
+      </div>
+      <div class="p-step" style="border-color:var(--line-dark);">
+        <span class="stage">03 — TEST</span>
+        <h4 style="color:var(--white);">Run at rated load before it ships</h4>
+        <p style="color:#A9C1C0;">Each machine runs a full load-and-leak test on-site here, and the test sheet ships with the unit.</p>
+      </div>
+      <div class="p-step" style="border-color:var(--line-dark);">
+        <span class="stage">04 — SUPPORT</span>
+        <h4 style="color:var(--white);">Stay reachable after delivery</h4>
+        <p style="color:#A9C1C0;">Commissioning support and a stocked parts line for the life of the machine, not just the warranty period.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div>
+      <h2>Not sure which drive train fits your load?</h2>
+      <p>Send us your duty cycle, altitude and site power, and we'll size the right machine instead of the biggest one.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="#contact" class="btn btn-amber">Get a sizing recommendation</a>
+      <a href="#products" class="btn btn-outline">Browse full range</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head" style="justify-content:center; text-align:center;">
+      <div style="max-width:640px; margin:0 auto;">
+        <span class="eyebrow" style="justify-content:center;">Get in touch</span>
+        <h2>Tell us the load. We'll tell you the machine.</h2>
+        <p style="margin-top:10px;">Sizing recommendations, spare parts quotes and general enquiries — usually answered within one working day.</p>
+      </div>
+    </div>
+
+    <div class="contact-details-grid">
+      <div class="contact-detail-card">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 4h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 14l5 2v3c0 1-1 2-2 2C11 21 3 13 3 6c0-1 1-2 2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="k">Contact number</div>
+        <div class="v">+1 (312) 555-0148</div>
+      </div>
+      <div class="contact-detail-card">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="k">Email</div>
+        <div class="v">sales@airsoll.com</div>
+      </div>
+      <div class="contact-detail-card">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="k">Address</div>
+        <div class="v">4400 Foundry Road, Unit 12<br>Charlotte, NC 28206, USA</div>
+      </div>
+      <div class="contact-detail-card">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div class="k">Hours</div>
+        <div class="v">Mon–Sat, 08:00–18:00 (site time)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <svg class="mark" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14.5" stroke="#E8A33D" stroke-width="2"/><path d="M16 6.5V16L22 21" stroke="#FBFBF9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="16" r="2" fill="#E8A33D"/></svg>
+          <span>AIRSOLL</span>
+        </a>
+        <p>Industrial air compressors, treatment equipment and spares — sized for the load you actually run.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2V5.5h-2c-2.2 0-4 1.8-4 4V12H9v3h2v6h3v-6h2.2l.8-3H14v-1.5c0-.55.45-1 1-1Z" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5v5M8 8.2v.1M12 15.5v-3c0-1 .7-1.8 1.8-1.8 1 0 1.7.8 1.7 1.8v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="6.5" width="17" height="11" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M11 10l3.2 2-3.2 2v-4Z" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#screw">Screw Compressors</a></li>
+          <li><a href="#vsd">PM VSD Compressors</a></li>
+          <li><a href="#oilfree">Oil-Free Screw</a></li>
+          <li><a href="#diesel">Portable Diesel</a></li>
+          <li><a href="#treatment">Air Treatment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About AIRSOLL</a></li>
+          <li><a href="#process">How We Build</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@airsoll.com">sales@airsoll.com</a></li>
+          <li><a href="tel:+13125550148">+1 (312) 555-0148</a></li>
+          <li>Mon–Sat, 08:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 AIRSOLL Industrial Air Systems. All rights reserved.</span>
+      <span>Design preview — not an active commercial site.</span>
+    </div>
+  </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Contact form: demo-only, no backend wired up.
+  var form = document.querySelector('#contact-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = document.querySelector('#form-status');
+      if (status) {
+        status.textContent = 'Thanks — this is a design preview, so the form isn\u2019t wired to send yet. Please email or call us directly for now.';
+      }
+      form.reset();
+    });
+  }
+
+  // Duplicate the measurement ticker content once for a seamless loop.
+  document.querySelectorAll('.tick-track').forEach(function (track) {
+    track.innerHTML += track.innerHTML;
+  });
+
+  // Highlight the current section in the nav while scrolling.
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.main-nav a');
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.getAttribute('id');
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(function (s) { observer.observe(s); });
+});
+</script>
+</body>
+</html>
